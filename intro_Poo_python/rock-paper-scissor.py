@@ -5,14 +5,16 @@ class Participant:
         self.choice = ""
 
     def choose(self):
-        self.choice = input(f"{self.name}, select rock, paper or scissor: ")
+        self.choice = input(f"{self.name}, select rock, paper, scissor, lizard or spock: ")
         print(f"{self.name} selects {self.choice}.")
 
     def toNumericalChoice(self):
         switcher = {
             "rock": 0,
             "paper": 1,
-            "scissor": 2
+            "scissor": 2,
+            "lizard": 3,
+            "spock": 4
         }
         return switcher[self.choice]
 
@@ -22,9 +24,11 @@ class Participant:
 class GameRound:
     def __init__(self, p1, p2):
         self.rules = [
-            [0, -1, 1],
-            [1, 0, -1],
-            [-1, 1, 0]
+            [0, -1, 1, 1, -1],
+            [1, 0, -1, -1, 1],
+            [-1, 1, 0, 1, -1],
+            [-1, 1, -1, 0, 1],
+            [1, -1, 1, -1, 0]
         ]
         p1.choose()
         p2.choose()
@@ -45,9 +49,6 @@ class GameRound:
             -1: "loss"
         }       
         return res[result]
-
-    def awardPoints(self):
-        print("implement")
 
 class Game:
     def __init__(self):
